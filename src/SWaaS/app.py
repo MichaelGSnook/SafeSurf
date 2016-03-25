@@ -35,7 +35,7 @@ def users(username):
                 word = request.form['word']
             else:
                 word = request.args.get('word','')
-            if not word in db[username]:
+            if not word in db[username] and len(word.strip()) != 0:
                 db[username].append(word)
             
         if request.method == 'DELETE':
