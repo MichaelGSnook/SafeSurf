@@ -63,7 +63,7 @@ def load_words(filename):
     with open(filename, 'r') as f:
         for line in f.readlines():
             if not '#' in line:
-                words.append(line)
+                words.append(line.strip())
 
 if __name__ == "__main__":
     load_words("src/SWaas/bad_words.txt")
