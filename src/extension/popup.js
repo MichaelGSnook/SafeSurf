@@ -1,4 +1,4 @@
-// 
+
 
 var a=0;
 function count() {
@@ -10,42 +10,51 @@ function count() {
     // profiles.textContent = "HAHAHAHA";
 
     $.ajax({	
-	    url: "http://fun.thomasmoll.co:5000/safesurf/users",
-	    data: null,
-	    success: loadUsers,
-	    dataType: "json"  
-	});
+        url: "http://fun.thomasmoll.co:5000/safesurf/users",
+        data: null,
+        success: loadUsers,
+        dataType: "json"  
+    });
 }
 
 function loadUsers(response){
-	console.log(response['users'])
-	var profiles = document.getElementById('profiles-list');
-	
+    console.log(response['users'])
+    var profiles = document.getElementById('profiles-list');
+    
 
-	var name;
-	// var radioHtml = "";
-	// for (var i = 0; i < response['users'].length; i++) {
-	// 	var name = response['users'][i];
-	// 	var element = document.createElement("input");
-	// 	//Assign different attributes to the element.
+    var name;
+    // var radioHtml = "";
+    // for (var i = 0; i < response['users'].length; i++) {
+    // 	var name = response['users'][i];
+    // 	var element = document.createElement("input");
+    // 	//Assign different attributes to the element.
  //        element.setAttribute("type", "radio");
  //        element.setAttribute("name", name);
-	    
-	//     // radioHtml += '<input type="radio" name="' + name + '"' + '/>';
-	//     profiles.appendChild(element);
-	//     // profiles.innerHTML.append(radioHtml);
-	// }​
+        
+    //     // radioHtml += '<input type="radio" name="' + name + '"' + '/>';
+    //     profiles.appendChild(element);
+    //     // profiles.innerHTML.append(radioHtml);
+    // }​
 
-	for(name in response['users']){
-		var radioBtn = document.createElement("input");
-		//Assign different attributes to the element.
-	    radioBtn.setAttribute("type", "radio");
-	    radioBtn.setAttribute("name", name);
-	    
-	    // radioHtml += '<input type="radio" name="' + name + '"' + '/>';
-	    profiles.appendChild(radioBtn);
-	    profiles.appendChild(document.createElement("div"));
-	}
-	
+    for(name in response['users']){
+        var radioBtn = document.createElement("input");
+        //Assign different attributes to the element.
+        radioBtn.setAttribute("type", "radio");
+        radioBtn.setAttribute("name", name);
+        
+        // radioHtml += '<input type="radio" name="' + name + '"' + '/>';
+        profiles.appendChild(radioBtn);
+        profiles.appendChild(document.createElement("div"));
+    }
+    
 }
+
+function storeProfile(username){
+    chrome.storage.local.set({'profile': username}, function() {
+          // Notify that we saved.
+          console.log('Saved Profile '+username)
+        });
+}
+
+storeProfile("supermom")
 document.getElementById('do-count').onclick = count;

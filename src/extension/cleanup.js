@@ -1,17 +1,17 @@
 // Asnyc call to load custom words
-$.ajax({
-    url: "http://fun.thomasmoll.co:5000/safesurf/words/supermom",
+chrome.storage.local.get('profile', function(result){
+    $.ajax({
+    url: "http://fun.thomasmoll.co:5000/safesurf/words/"+result.profile,
     data: null,
     success: clean,
     dataType: "json"  
-});
+    });
+})
 
 // Async call to load the local bad words
 $.get("http://fun.thomasmoll.co/safesurf/bad_words.txt", scrub)
     
-function clean(response){
-    console.log(response['result'][0])
-   
+function clean(response){   
     words = response['result']
    
     for(var i=0; i<words.length; i++){
