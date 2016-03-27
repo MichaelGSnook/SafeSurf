@@ -20,7 +20,7 @@ def get_users():
     else:
         return jsonify(error="No currently registered users", status=404)
 
-@app.route(base+"/users/<username>", methods = ['GET', 'POST', 'DELETE'])
+@app.route(base+"/user/<username>", methods = ['GET', 'POST', 'DELETE'])
 def users(username):
     if username in db:
         if request.method == 'GET':
@@ -64,10 +64,6 @@ def unregister_user(username):
         return jsonify(status=200)
     else:
         return jsonify(error="User does not exist", status=404)
-
-@app.route(base+"/words")
-def get_base_words():
-    return jsonify(result=words)
     
 @app.route(base+"/words/<username>")
 def get_user_words(username):
@@ -81,7 +77,7 @@ def load_users(databasename):
     db = pickle.load(open(databasename, "rb"))
     
 def store_users(databasename):
-    pickle.dump(db, open(databasename, "wb"))
+    pickle.dump(db, open(databasename, "wb"), protocol=2)
 
 def cleanup():
     store_users("users.db")
