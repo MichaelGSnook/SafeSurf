@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import pickle, atexit
 app = Flask(__name__)
 
 base = "/safesurf"
@@ -7,9 +8,6 @@ base = "/safesurf"
 db = {'supermom':['cluckers'],
       'jesusmom':['devil', '666'],
       'conspiracydad':['jet', 'fuel']}
-
-# List of default bad words
-words = []
 
 @app.route(base+"/")
 def hello():
@@ -40,7 +38,12 @@ def users(username):
                 db[username].append(word)
             
         if request.method == 'DELETE':
-            db.pop(username, None)
+            if len(request.form) != 0:
+                word = request.form['word']
+            else:
+                word = request.args.get('word','')
+            if word in db[username] and len(word.strip()) != 0:
+                db[username].remove(word)
         
         return jsonify(status=200)
     else:
@@ -50,10 +53,17 @@ def users(username):
 def register_user(username):
     if not username in db:
         db[username] = list()
-	return jsonify(status=200)
+        return jsonify(status=200)
     else:
         return jsonify(error="User already exists", status=404)
 
+@app.route(base+"/unregister/<username>")
+def unregister_user(username):
+    if username in db:
+        db.pop(username, None)
+        return jsonify(status=200)
+    else:
+        return jsonify(error="User does not exist", status=404)
 
 @app.route(base+"/words")
 def get_base_words():
@@ -66,15 +76,18 @@ def get_user_words(username):
     else:
         return jsonify(result=db[username], status=200)    
 
+def load_users(databasename):
+    global db
+    db = pickle.load(open(databasename, "rb"))
     
-def load_words(filename):
-    global words
-    with open(filename, 'r') as f:
-        for line in f.readlines():
-            if not '#' in line:
-                words.append(line.strip())
+def store_users(databasename):
+    pickle.dump(db, open(databasename, "wb"))
 
+def cleanup():
+    store_users("users.db")
+    
+atexit.register(cleanup)
 if __name__ == "__main__":
-    load_words("bad_words.txt")
+    load_users("users.db")
     #app.debug = True
     app.run(host='0.0.0.0')
