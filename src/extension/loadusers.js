@@ -16,9 +16,9 @@ function loadUsers(response){
 		//Assign different attributes to the element.
 	    btn.setAttribute("type", "button");
 	    btn.setAttribute("value", name);
-	    btn.setAttribute("style", "width:100px;height:50px");	    
+	    btn.setAttribute("style", "width:100px;height:50px");
+	    // btn.onlick = somefunction(btn.name);
 	    
-	    // radioHtml += '<input type="radio" name="' + name + '"' + '/>';
 	    profiles.appendChild(btn);
 	    profiles.appendChild(document.createElement("div"));
 	}
