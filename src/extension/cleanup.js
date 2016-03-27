@@ -1,18 +1,12 @@
-var elements = document.getElementsByTagName('*');
 
-for (var i = 0; i < elements.length; i++) {
-    var element = elements[i];
+$.ajax({
+    url: "localhost:5000/words/supermom",
+    data: null,
+    sucess: clean,
+    dataType: "json"  
+});
 
-    for (var j = 0; j < element.childNodes.length; j++) {
-        var node = element.childNodes[j];
 
-        if (node.nodeType === 3) {
-            var text = node.nodeValue;
-            var replacedText = text.replace(document.getElementById("badwords").value, '****');
-
-            if (replacedText !== text) {
-                element.replaceChild(document.createTextNode(replacedText), node);
-            }
-        }
-    }
+function clean(word){
+    document.body.innerHTML = document.body.innerHTML.replace(new RegExp(word, "ig"), 'cluck')
 }
