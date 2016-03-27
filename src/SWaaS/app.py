@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 app = Flask(__name__)
-app.config["APPLICATION_ROOT"] = "/SafeSurf"
+
+base = "/safesurf"
 
 # Database for storing custom bad words
 db = {'supermom':['cluckers'],
@@ -10,18 +11,18 @@ db = {'supermom':['cluckers'],
 # List of default bad words
 words = []
 
-@app.route("/")
+@app.route(base+"/")
 def hello():
     return "SafeSurf: Swear Words as a service"
     
-@app.route("/users")
+@app.route(base+"/users")
 def get_users():
     if len(db) != 0:
         return jsonify(users=list(db.keys()), number_of_users=len(db), status=200)
     else:
         return jsonify(error="No currently registered users", status=404)
 
-@app.route("/users/<username>", methods = ['GET', 'POST', 'DELETE'])
+@app.route(base+"/users/<username>", methods = ['GET', 'POST', 'DELETE'])
 def users(username):
     if username in db:
         if request.method == 'GET':
@@ -44,13 +45,21 @@ def users(username):
         return jsonify(status=200)
     else:
         return jsonify(error="No user found with that name", status=404)
-            
 
-@app.route("/words")
+@app.route(base+"/register/<username>")
+def register_user(username):
+    if not username in db:
+        db[username] = list()
+	return jsonify(status=200)
+    else:
+        return jsonify(error="User already exists", status=404)
+
+
+@app.route(base+"/words")
 def get_base_words():
     return jsonify(result=words)
     
-@app.route("/words/<username>")
+@app.route(base+"/words/<username>")
 def get_user_words(username):
     if not username in db:
         return jsonify(error="Cannot find custom words for that user", status=404)
@@ -66,6 +75,6 @@ def load_words(filename):
                 words.append(line.strip())
 
 if __name__ == "__main__":
-    load_words("src/SWaas/bad_words.txt")
-    app.debug = True
-    app.run()
+    load_words("bad_words.txt")
+    #app.debug = True
+    app.run(host='0.0.0.0')
