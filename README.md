@@ -12,6 +12,6 @@ Flask server files and database files.
 
 To install the Chrome extension: [follow the instructions under "Load the extension"](https://developer.chrome.com/extensions/getstarted#unpacked)
 
-TODO: Finish instructions on how to load profile
+Once the extension is loaded, you may click the 'doge' icon, which will bring up a login window. Login using an existing profile or create a new account. Once logged in, you may add custom words to be censored using the 'Add word to Block' button and text field. The words entered in this fashion will be unique to the specific user and be saved between sessions. 
 
 Then goto the following test URL [http://fun.thomasmoll.co/safesurf/](http://fun.thomasmoll.co/safesurf/)
