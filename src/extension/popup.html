@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <HTML>
-<script src="lib/jquery-2.2.2.min.js"> </script>
-<script src="loadusers.js"></script>
-<HEAD>
+  <script src="lib/jquery-2.2.2.min.js"> </script>
 
-</HEAD>
-
-<BODY>
-
-<p id="demo">=a</p>
-<button type="button" id="do-count">Load Profiles</button>
-<script src="popup.js"></script>
-
-<div id="colorThis">
-<h1>
-SafeSurf
-</h1>
-</div>
-
-<hr>
-<div id="profiles-list">Profiles: </div>
-<div id="radio-list"></div>
-
-
-</BODY>
+  <BODY>
+    <center><h1><font color="blue">SafeSurf</font></h1></center>
+    <div id="welcome"> </div>
+    <form id="form" > <!-- set action in javascript-->
+      User Profile:<br>
+      <center><input id="usernameBox" type="text" name="username" style="width:140px;height:10px" value="username here"></center>
+      <center><font id="userExists" color="red" style="visibility:hidden"><i>User already exists!</i></font></center>
+      <hr>
+      <!-- <center><img src="line1.gif" alt="line" width="600" height="1"></center> -->
+    </form>
+      <center>
+        <input type="button" id="login" style="width:150px;height:50px" value="Login">
+        <br><br>
+      </center>
+      <center>
+        <input type="button" id="newUser" style="width:150px;height:50px" value="Create New Account">
+      </center>
+    <script src="popup.js"></script>
+    <hr>
+    <div id="profiles-list">Profiles: </div>
+  </BODY>
 </HTML>
