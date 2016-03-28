@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <HTML>
   <script src="lib/jquery-2.2.2.min.js"> </script>
-
-  <BODY>
-    <center><h1><font color="blue">SafeSurf</font></h1></center>
-    <div id="welcome"> </div>
-    <form id="form" > <!-- set action in javascript-->
-      User Profile:<br>
-      <center><input id="usernameBox" type="text" name="username" style="width:140px;height:10px" value="username here"></center>
-      <center><font id="userExists" color="red" style="visibility:hidden"><i>User already exists!</i></font></center>
+  <HEAD> <center><h1><font color="blue">SafeSurf</font></h1></center></HEAD>
+  <BODY id=body>
+    
+    <h1 id="welcome"></h1>
+    <div id="loginActions" style="display:inline">
+      <form id="form" > <!-- set action in javascript-->
+        Username:<br>
+        <center><input id="usernameBox" type="text" name="username" style="width:140px;height:10px" value="username here"></center>
+        <center><font id="userExists" color="red" style="display:none"><i>User already exists!</i></font></center>
+        <center><font id="noUser" color="red" style="display:none"><i>User doesn't exist!</i></font></center>
+        <!-- <center><img src="line1.gif" alt="line" width="600" height="1"></center> -->
+      </form>
+    
       <hr>
-      <!-- <center><img src="line1.gif" alt="line" width="600" height="1"></center> -->
-    </form>
       <center>
         <input type="button" id="login" style="width:150px;height:50px" value="Login">
         <br><br>
@@ -19,8 +22,22 @@
       <center>
         <input type="button" id="newUser" style="width:150px;height:50px" value="Create New Account">
       </center>
-    <script src="popup.js"></script>
+    </div>
+
+      <center>
+        <input type="button" id="logout" style="width:150px;height:50px" value="Logout">
+        <br>
+      </center>
+    </div>
     <hr>
-    <div id="profiles-list">Profiles: </div>
+    <form id="addWordForm" style="visibility:hidden"> 
+      Add Word:<br>
+      <center><input id="wordToAdd" type="text" name="wordToAdd" style="width:140px;height:10px" value="word here"></center>
+      <br>
+      <center>
+        <input type="button" id="addWord" style="width:150px;height:50px" value="Add Word to Block">
+      </center>
+    </form>
+    <script src="popup.js"></script>
   </BODY>
 </HTML>
