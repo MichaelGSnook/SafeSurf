@@ -14,4 +14,4 @@ To install the Chrome extension: [follow the instructions under "Load the extens
 
 TODO: Finish instructions on how to load profile
 
-Then goto the following test URL [https://fun.thomasmoll.co/safesurf/](fun.thomasmoll.co/safesurf/)
+Then goto the following test URL [http://fun.thomasmoll.co/safesurf/](http://fun.thomasmoll.co/safesurf/)
